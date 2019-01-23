@@ -1,0 +1,61 @@
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: {{ include "youcanbenefit-chart.elasticsearch.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "youcanbenefit-chart.elasticsearch.name" . }}
+    helm.sh/chart: {{ include "youcanbenefit-chart.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.elasticsearch.replicaCount }}
+  serviceName: {{ include "youcanbenefit-chart.elasticsearch.fullname" . }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "youcanbenefit-chart.elasticsearch.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "youcanbenefit-chart.elasticsearch.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ include "youcanbenefit-chart.elasticsearch.fullname" . }}
+          image: "{{ .Values.elasticsearch.image.repository }}:{{ .Values.elasticsearch.image.tag }}"
+          imagePullPolicy: {{ .Values.elasticsearch.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.elasticsearch.service.port }}
+          readinessProbe:
+            httpGet:
+              path: /_cluster/health?local=true
+              port: {{ .Values.elasticsearch.service.port }}
+            initialDelaySeconds: 5
+          resources:
+{{ toYaml .Values.elasticsearch.resources | indent 12 }}
+          env:
+            - name: discovery.type
+              value: single-node
+          {{- if .Values.elasticsearch.persistence.enabled }}
+          volumeMounts:
+            - mountPath: /usr/share/elasticsearch/data
+              name: data
+          {{- end }}
+      {{- if .Values.elasticsearch.persistence.enabled }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Values.elasticsearch.persistence.name }}
+      {{- end }}
+  {{- if .Values.elasticsearch.persistence.enabled }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ .Values.elasticsearch.persistence.name }}
+      spec:
+        accessModes:
+          - {{ .Values.elasticsearch.persistence.accessMode | quote }}
+        resources:
+          requests:
+            storage: "{{ .Values.elasticsearch.persistence.size }}"
+  {{- end }}

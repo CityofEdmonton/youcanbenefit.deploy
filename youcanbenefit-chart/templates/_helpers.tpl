@@ -12,6 +12,11 @@ Expand the name of the chart.
 {{- default $maybe .Values.backend.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "youcanbenefit-chart.elasticsearch.name" -}}
+{{- $maybe := printf "%s-%s" .Chart.Name .Values.elasticsearch.name -}}
+{{- default $maybe .Values.elasticsearch.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 {{/*
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
@@ -37,6 +42,20 @@ If release name contains chart name it will be used as a full name.
 {{- else -}}
 {{- $maybe := printf "%s-%s" .Chart.Name .Values.backend.name -}}
 {{- $name := default $maybe .Values.backend.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{- define "youcanbenefit-chart.elasticsearch.fullname" -}}
+{{- if .Values.elasticsearch.fullnameOverride -}}
+{{- .Values.elasticsearch.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $maybe := printf "%s-%s" .Chart.Name .Values.elasticsearch.name -}}
+{{- $name := default $maybe .Values.elasticsearch.nameOverride -}}
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}

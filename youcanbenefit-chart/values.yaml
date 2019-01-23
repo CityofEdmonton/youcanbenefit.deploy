@@ -63,7 +63,24 @@ backend:
     #  memory: 128Mi
 
 elasticsearch:
-  url: localhost:9200
+  name: es
+  replicaCount: 1
+
+  image:
+    repository: docker.elastic.co/elasticsearch/elasticsearch
+    tag: 6.5.4
+    pullPolicy: IfNotPresent
+  
+  service:
+    type: ClusterIP
+    port: 9200
+  resources: {}
+
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    name: data
+    size: "2Gi"
 
 ingress:
   enabled: false

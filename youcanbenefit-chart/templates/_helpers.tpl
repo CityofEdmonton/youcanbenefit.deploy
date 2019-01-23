@@ -8,7 +8,8 @@ Expand the name of the chart.
 {{- end -}}
 
 {{- define "youcanbenefit-chart.backend.name" -}}
-{{- default .Chart.Name .Values.nameOverride "backend" | trunc 63 | trimSuffix "-" -}}
+{{- $maybe := printf "%s-%s" .Chart.Name .Values.backend.name -}}
+{{- default $maybe .Values.backend.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
@@ -31,10 +32,11 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 
 {{- define "youcanbenefit-chart.backend.fullname" -}}
-{{- if .Values.fullnameOverride -}}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.backend.fullnameOverride -}}
+{{- .Values.backend.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride "backend" -}}
+{{- $maybe := printf "%s-%s" .Chart.Name .Values.backend.name -}}
+{{- $name := default $maybe .Values.backend.nameOverride -}}
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}

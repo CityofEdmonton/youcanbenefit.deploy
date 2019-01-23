@@ -1,0 +1,34 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "youcanbenefit-chart.backend.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "youcanbenefit-chart.backend.name" . }}
+    helm.sh/chart: {{ include "youcanbenefit-chart.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "youcanbenefit-chart.backend.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "youcanbenefit-chart.backend.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ include "youcanbenefit-chart.backend.fullname" . }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources:
+{{ toYaml .Values.backend.resources | indent 12 }}
+          env:
+          - name: ELASTICSEARCH_URL
+            value: {{ .Values.backend.elasticsearchUrl }}

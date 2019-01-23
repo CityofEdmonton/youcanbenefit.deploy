@@ -31,4 +31,4 @@ spec:
 {{ toYaml .Values.backend.resources | indent 12 }}
           env:
           - name: ELASTICSEARCH_URL
-            value: {{ .Values.elasticsearch.url }}
+            value: {{ include "youcanbenefit-chart.elasticsearch.fullname" . }}:{{ .Values.elasticsearch.service.port }}

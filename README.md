@@ -5,9 +5,9 @@ The deployment files for YouCanBenefit. https://github.com/yeg-relief/youcanbene
  To deploy this Helm chart, first ensure the K8s cluster you want to deploy to has Tiller running in it. Next clone this repository to your local system. From the root, run:
  
  ``` bash
- helm install ./youcanbenefit-chart --set frontend.service.type=LoadBalancer --set elasticsearch.url=localhost:9200
+ helm install ./youcanbenefit-chart --set frontend.service.type=LoadBalancer
  ```
  
-This will create an instance of YouCanBenefit that is exposed by the load balancer. Note that you must run Elasticsearch yourself. In the future, we will have this chart handling it.
+This will create an instance of YouCanBenefit that is exposed by the load balancer.
 
 Look in `./youcanbenefit-chart/values.yaml` for values you can override.

@@ -31,4 +31,4 @@ spec:
 {{ toYaml .Values.backend.resources | indent 12 }}
           env:
           - name: ELASTICSEARCH_URL
-            value: {{ .Values.backend.elasticsearchUrl }}
+            value: {{ .Values.elasticsearch.url }}

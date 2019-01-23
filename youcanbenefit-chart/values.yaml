@@ -46,8 +46,6 @@ backend:
   service:
     type: ClusterIP
     port: 3000
-  
-  elasticsearchUrl: not-a-url
 
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -60,6 +58,9 @@ backend:
     # requests:
     #  cpu: 100m
     #  memory: 128Mi
+
+elasticsearch:
+  url: localhost:9200
 
 ingress:
   enabled: false

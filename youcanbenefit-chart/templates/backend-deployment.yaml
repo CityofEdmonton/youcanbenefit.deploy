@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.backend.service.port }}
               protocol: TCP
           resources:
 {{ toYaml .Values.backend.resources | indent 12 }}

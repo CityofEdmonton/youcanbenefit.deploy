@@ -27,5 +27,15 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
+          env:
+            - name: API_SERVICE
+              value: {{ include "youcanbenefit-chart.backend.fullname" . }}
+            - name: API_PORT
+              value: {{ .Values.backend.service.port | quote}}
+            - name: ADMIN_USERNAME
+              value: {{ .Values.admin.username }}
+            - name: ADMIN_PASSWORD
+              value: {{ .Values.admin.password }}
           resources:
 {{ toYaml .Values.frontend.resources | indent 12 }}
+

@@ -2,6 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+admin:
+  username: user
+  password: password
 
 frontend:
   name: frontend
@@ -9,7 +12,7 @@ frontend:
 
   image:
     repository: cityofedmonton/youcanbenefit-web
-    tag: bf74d5726845f130f66c08cf4a4febc32389a6f7
+    tag: test2
     pullPolicy: IfNotPresent
 
   nameOverride: ""

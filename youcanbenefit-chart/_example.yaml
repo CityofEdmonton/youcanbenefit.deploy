@@ -1,0 +1,19 @@
+admin:
+  username: jared
+  password: newPassword
+
+frontend:
+  service:
+    type: LoadBalancer
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - foobar.127.0.0.1.xip.io
+  tls:
+    - secretName: foo-secret
+      hosts:
+        - foobar.127.0.0.1.xip.io

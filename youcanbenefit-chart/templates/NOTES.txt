@@ -1,5 +1,9 @@
 1. Get the application URL by running these commands:
 {{- if .Values.ingress.enabled }}
+{{- if .Values.ingress.tls }}
+  echo "Please ensure you have a secret saved for your TLS"
+  echo "https://github.com/CityofEdmonton/youcanbenefit.deploy/"
+{{- end }}
 {{- range .Values.ingress.hosts }}
   http{{ if $.Values.ingress.tls }}s{{ end }}://{{ . }}{{ $.Values.ingress.path }}
 {{- end }}

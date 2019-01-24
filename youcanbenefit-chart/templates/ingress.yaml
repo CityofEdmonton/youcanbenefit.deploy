@@ -1,12 +1,12 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "youcanbenefit-chart.fullname" . -}}
+{{- $fullName := include "youcanbenefit-chart.frontend.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app.kubernetes.io/name: {{ include "youcanbenefit-chart.name" . }}
+    app.kubernetes.io/name: {{ include "youcanbenefit-chart.frontend.name" . }}
     helm.sh/chart: {{ include "youcanbenefit-chart.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -33,6 +33,6 @@ spec:
           - path: {{ $ingressPath }}
             backend:
               serviceName: {{ $fullName }}
-              servicePort: http
+              servicePort: {{ $.Values.frontend.service.port }}
   {{- end }}
 {{- end }}

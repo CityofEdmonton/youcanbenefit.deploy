@@ -25,10 +25,10 @@ YouCanBenefit should be deployed with an admin account. By default, the user is 
 For this example, we're going to switch to using Helm's file overriding syntax rather than passing values on the command line. 
 
 #### Self-signed Traffic
-In this example, we're going to use a self-signed certifcate for foo.bar.com. Please use a proper cert in production.
+We're going to use a self-signed certifcate for foo.bar.com. Please use a proper cert in production.
 
 ``` bash
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/tls.key -out /tmp/tls.crt -subj "/CN=foo.bar.com"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /tmp/tls.key -out /tmp/tls.crt -subj "/CN=foobar.127.0.0.1.xip.io"
 ```
 
 You should now have a temporary key and certificate. We will save this in a K8s Secret:
@@ -37,4 +37,4 @@ You should now have a temporary key and certificate. We will save this in a K8s 
 kubectl create secret tls foo-secret --key /tmp/tls.key --cert /tmp/tls.crt
 ```
 
-If you want to trick your computer into thinking foo.bar.com can be found on your local machine, edit your Hosts file. This is a file that most OS check prior to doing a DNS lookup. You should add something like `localhost       foo.bar.com`. You could also try a service like [xip.io](http://xip.io/).
+We're using [xip.io](http://xip.io/) to loopback to our machine.

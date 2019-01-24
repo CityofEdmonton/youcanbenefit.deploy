@@ -37,4 +37,8 @@ You should now have a temporary key and certificate. We will save this in a K8s 
 kubectl create secret tls foo-secret --key /tmp/tls.key --cert /tmp/tls.crt
 ```
 
-We're using [xip.io](http://xip.io/) to loopback to our machine.
+We're using [xip.io](http://xip.io/) to loopback to our machine. Now install like this:
+
+``` bash
+helm install -f ./youcanbenefit-chart/_example.yaml ./youcanbenefit-chart/
+```

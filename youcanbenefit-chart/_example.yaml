@@ -1,10 +1,12 @@
 admin:
-  username: jared
-  password: newPassword
+  username: admin
+  password: hj7dhnjksjkdfgh74rhs
 
 frontend:
+  image:
+    tag: stable
   service:
-    type: LoadBalancer
+    type: NodePort
 
 ingress:
   enabled: true
@@ -12,8 +14,8 @@ ingress:
     kubernetes.io/tls-acme: "true"
   path: /
   hosts:
-    - foobar.127.0.0.1.xip.io
+    - foo.35.236.44.172.xip.io
   tls:
     - secretName: foo-secret
       hosts:
-        - foobar.127.0.0.1.xip.io
+        - foo.35.236.44.172.xip.io

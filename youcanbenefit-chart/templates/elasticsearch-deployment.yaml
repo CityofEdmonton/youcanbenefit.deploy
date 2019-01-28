@@ -20,6 +20,8 @@ spec:
         app.kubernetes.io/name: {{ include "youcanbenefit-chart.elasticsearch.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      securityContext:
+          fsGroup: 1000
       containers:
         - name: {{ include "youcanbenefit-chart.elasticsearch.fullname" . }}
           image: "{{ .Values.elasticsearch.image.repository }}:{{ .Values.elasticsearch.image.tag }}"
@@ -34,6 +36,13 @@ spec:
             initialDelaySeconds: 5
           resources:
 {{ toYaml .Values.elasticsearch.resources | indent 12 }}
+          securityContext:
+            privileged: true
+            runAsUser: 1000
+            capabilities:
+              add:
+              - IPC_LOCK
+              - SYS_RESOURCE
           env:
             - name: discovery.type
               value: single-node

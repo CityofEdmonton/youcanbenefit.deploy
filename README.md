@@ -42,3 +42,6 @@ We're using [xip.io](http://xip.io/) to loopback to our machine. Now install lik
 ``` bash
 helm install -f ./youcanbenefit-chart/_example.yaml ./youcanbenefit-chart/
 ```
+
+### Chart Repository
+We use [this](https://hackernoon.com/using-a-private-github-repo-as-helm-chart-repo-https-access-95629b2af27c) guide to treat our GitHub repo as a Chart repository. Note that we require a private access token. 

@@ -25,7 +25,22 @@ spec:
       secretName: {{ .secretName }}
   {{- end }}
 {{- end }}
+{{- if and (eq .Values.ingress.enabled true) (eq .Values.ingress.autotls true) }}
+  tls:
+    - hosts:
+        - {{ include "youcanbenefit-chart.domain" . }}
+      secretName: autotls
+{{- end }}
   rules:
+  {{- if and (eq .Values.ingress.enabled true) (eq .Values.ingress.autotls true) }}
+    - host: {{ include "youcanbenefit-chart.domain" . | quote }}
+      http:
+        paths:
+          - path: {{ $ingressPath }}
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: {{ $.Values.frontend.service.port }}
+  {{- end }}
   {{- range .Values.ingress.hosts }}
     - host: {{ . | quote }}
       http:
@@ -35,4 +50,5 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: {{ $.Values.frontend.service.port }}
   {{- end }}
+  
 {{- end }}

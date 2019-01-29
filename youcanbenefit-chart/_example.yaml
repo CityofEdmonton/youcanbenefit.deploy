@@ -8,14 +8,3 @@ frontend:
   service:
     type: NodePort
 
-ingress:
-  enabled: true
-  annotations:
-    kubernetes.io/tls-acme: "true"
-  path: /
-  hosts:
-    - foo.35.236.44.172.xip.io
-  tls:
-    - secretName: foo-secret
-      hosts:
-        - foo.35.236.44.172.xip.io

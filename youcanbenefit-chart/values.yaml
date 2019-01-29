@@ -2,6 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+host: 35.236.44.172.xip.io
+
 admin:
   username: user
   password: password
@@ -19,7 +21,7 @@ frontend:
   fullnameOverride: ""
 
   service:
-    type: ClusterIP
+    type: NodePort
     port: 80
 
   resources: {}
@@ -83,14 +85,9 @@ elasticsearch:
     size: "2Gi"
 
 ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  enabled: true
+  annotations:
+    kubernetes.io/tls-acme: "true"
   path: /
-  hosts:
-    - chart-example.local
+  autotls: true
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local

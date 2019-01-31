@@ -29,7 +29,6 @@ spec:
   tls:
     - hosts:
         - {{ include "youcanbenefit-chart.domain" . }}
-      secretName: autotls
 {{- end }}
   rules:
   {{- if and (eq .Values.ingress.enabled true) (eq .Values.ingress.autotls true) }}

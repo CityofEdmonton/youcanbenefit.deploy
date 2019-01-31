@@ -3,7 +3,30 @@ entries:
   youcanbenefit-chart:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-01-30T16:34:42.07395-07:00
+    created: 2019-01-31T09:38:57.739975-07:00
+    description: YouCanBenefit is a web application that increases social benefit
+      program discoverability for people of lesser means and their allies.
+    digest: 8eacd6100f193d20f77a20b41ce011ce6b0a146f4fd628e00e907ef7fc689edc
+    home: https://youcanbenefit.edmonton.ca/home
+    icon: https://i.imgur.com/apxcBeR.png
+    keywords:
+    - Elasticsearch
+    - NestJS
+    - Angular
+    maintainers:
+    - email: jared.rewerts@edmonton.ca
+      name: Jared Rewerts
+      url: https://github.com/j-rewerts
+    name: youcanbenefit-chart
+    sources:
+    - https://github.com/yeg-relief/youcanbenefit
+    - https://github.com/CityofEdmonton/youcanbenefit.deploy
+    urls:
+    - youcanbenefit-chart-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2019-01-31T09:38:57.739625-07:00
     description: YouCanBenefit is a web application that increases social benefit
       program discoverability for people of lesser means and their allies.
     digest: 85a0b1c1d7ba859b7f838413c07acb7b4273204d6563635e875cac7940ff42b7
@@ -26,7 +49,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-01-30T16:34:42.073026-07:00
+    created: 2019-01-31T09:38:57.739068-07:00
     description: YouCanBenefit is a web application that increases social benefit
       program discoverability for people of lesser means and their allies.
     digest: d704ca4546ee109dc3d156a185ca03ddc76c5b4f9d5c97aeff1626604eb000ee
@@ -47,4 +70,4 @@ entries:
     urls:
     - youcanbenefit-chart-1.0.0.tgz
     version: 1.0.0
-generated: 2019-01-30T16:34:42.070183-07:00
+generated: 2019-01-31T09:38:57.737011-07:00

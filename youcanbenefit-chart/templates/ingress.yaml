@@ -40,8 +40,8 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: {{ $.Values.frontend.service.port }}
   {{- end }}
-  {{- range .Values.ingress.hosts }}
-    - host: {{ . | quote }}
+  {{- if and (eq .Values.ingress.enabled true) (eq .Values.ingress.autotls false) }}
+    - host: {{ include "youcanbenefit-chart.domain" . | quote }}
       http:
         paths:
           - path: {{ $ingressPath }}

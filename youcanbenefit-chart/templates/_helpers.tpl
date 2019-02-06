@@ -4,8 +4,11 @@
 Domain name for auto TLS generation.
 */}}
 {{- define "youcanbenefit-chart.domain" -}}
-{{- $maybe := printf "%s.%s" .Release.Name .Values.host -}}
-{{- $maybe | trunc 63 | trimSuffix "-" -}}
+{{- if eq .Values.ingress.autotls true -}}
+{{- printf "%s.%s" .Release.Name .Values.host -}}
+{{- else -}}
+{{- printf "%s" .Values.host -}}
+{{- end -}}
 {{- end -}}
 
 {{/*

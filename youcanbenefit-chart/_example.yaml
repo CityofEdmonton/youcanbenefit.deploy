@@ -1,6 +1,6 @@
 admin:
-  username: admin
-  password: hj7dhnjksjkdfgh74rhs
+  username: user
+  password: password
 
 frontend:
   image:

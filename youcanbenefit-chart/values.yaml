@@ -14,7 +14,7 @@ frontend:
 
   image:
     repository: cityofedmonton/youcanbenefit-web
-    tag: stable
+    tag: latest
     pullPolicy: IfNotPresent
 
   nameOverride: ""
@@ -42,7 +42,7 @@ backend:
 
   image:
     repository: cityofedmonton/youcanbenefit-api
-    tag: stable
+    tag: latest
     pullPolicy: IfNotPresent
 
   nameOverride: ""

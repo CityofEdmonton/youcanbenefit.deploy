@@ -1,0 +1,4 @@
+{$DOMAIN_NAME}
+tls {$EMAIL_FOR_DOMAIN}
+
+proxy / {$WEB_SERVICE}:80

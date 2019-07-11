@@ -30,11 +30,15 @@ Run `cd youcanbenefit.deploy/docker-compose-deployment`.
 Set up a domain name and point it to the IP address of the VM.
 
 ## Setting the environment variables
-Use a text editor such as vim to edit the environment variables located in the `.env` file.
+Use a text editor such as vim to edit the environment variables located in the docker-compose.yml file:
 
-There are four environment variables to be configured:
+There are four environment variables to be configured.
+
+Two of them are under the `caddy` service for the Caddy web server:
 - DOMAIN_NAME: the domain name that YouCanBenefit will be hosted at
 - EMAIL_FOR_DOMAIN: the associated email for the domain name
+
+Two of them are under the `web` service for the admin section of YouCaBenefit:
 - ADMIN_USERNAME: the username that will be used to log into the admin section of YouCanBenefit
 - ADMIN_PASSWORD: the password that will be used to log into the admin section of YouCanBenefit
 

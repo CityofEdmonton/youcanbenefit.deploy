@@ -4,10 +4,10 @@ services:
   caddy:
     image: abiosoft/caddy:0.11.2
     environment:
+     - DOMAIN_NAME=example.com
+     - EMAIL_FOR_DOMAIN=example@gmail.com
      - ACME_AGREE=true
      - WEB_SERVICE=web
-    env_file:
-     - ./.env
     ulimits:
       nofile:
         soft: 8196
@@ -26,10 +26,10 @@ services:
   web:
     image: cityofedmonton/youcanbenefit-web:latest
     environment:
+      - ADMIN_USERNAME=user
+      - ADMIN_PASSWORD=password
       - API_SERVICE=api
       - API_PORT=3000
-    env_file:
-      - ./.env
     ulimits:
       nofile:
         soft: 8196

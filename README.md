@@ -40,11 +40,14 @@ kubectl create secret tls foo-secret --key /tmp/tls.key --cert /tmp/tls.crt
 We're using [xip.io](http://xip.io/) to loopback to our machine. Now install like this:
 
 ``` bash
-helm install -f ./youcanbenefit-chart/_example.yaml ./youcanbenefit-chart/
+helm install ycb-test -f ./youcanbenefit-chart/_example.yaml ./youcanbenefit-chart/
 ```
 
 ### Chart Repository
-We use [this](https://hackernoon.com/using-a-private-github-repo-as-helm-chart-repo-https-access-95629b2af27c) guide to treat our GitHub repo as a Chart repository. Note that we require a private access token. 
+This chart repository is hosted with GitHub Pages. To add it to your list of Helm repositories, run 
+``` bash
+helm repo add youcanbenefit https://cityofedmonton.github.io/youcanbenefit.deploy/helm/
+```
 
 ### Building a new chart release
 Run the following:
